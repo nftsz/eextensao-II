@@ -1,0 +1,21 @@
+/* Conteúdo */
+.main-content {
+    padding: 30px 40px;
+    flex: 1;
+}
+
+.content-section {
+    background: white;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.section-title {
+    color: #273287;
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+

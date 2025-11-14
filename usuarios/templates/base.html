@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Monitora OCI{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'usuarios/css/base.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'usuarios/img/logo2.png' %}" alt="Logo" class="header-logo">
+        </a>
+
+        <div class="user-info">
+            <div class="welcome-message">
+                Bem-vindo(a), <strong>{{ user.nome }} {{ user.sobrenome }}</strong>
+            </div>
+            <div class="ubs-info">
+                {{ user.ubs }} | {{ user.cargo }}
+            </div>
+        </div>
+
+        {% if user.is_authenticated %}
+        <div class="logout-section">
+            <form action="{% url 'logout' %}" method="post" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn"><span>Sair</span></button>
+            </form>
+        </div>
+        {% endif %}
+    </header>
+
+    <!-- Menu -->
+    <nav class="functionalities-menu">
+        <div class="menu-inline">
+            <a href="#" class="menu-item"><span>Cadastrar</span></a>
+            <a href="#" class="menu-item"><span>Consultar</span></a>
+            <a href="#" class="menu-item"><span>Dashboard</span></a>
+            <a href="#" class="menu-item"><span>Relatórios</span></a>
+            <a href="#" class="menu-item"><span>Configurações</span></a>
+        </div>
+    </nav>
+
+    <!-- Conteúdo -->
+    <main class="main-content">
+        {% block content %}
+        <!-- Conteúdo das páginas entra aqui -->
+        {% endblock %}
+    </main>
+</body>
+
+</html>
