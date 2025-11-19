@@ -17,7 +17,7 @@
             {% else %}
             <span class="disabled">&lt;</span>
             {% endif %}
-    
+
             {% if latest_page.has_next %}
             <a href="?page_latest={{ latest_page.next_page_number }}">&gt;</a>
             {% else %}
@@ -25,7 +25,7 @@
             {% endif %}
         </span>
     </h2>
-    
+
     <!-- Recentes Adicionadas -->
     <table class="tabela-pacientes">
         <thead>
@@ -48,7 +48,15 @@
                 <td>{{ oci.profissional_executante }}</td>
                 <td>{{ oci.data_abertura|date:"d/m/Y" }}</td>
                 <td>{{ oci.data_conclusao|date:"d/m/Y" }}</td>
-                <td>{{ oci.data_limite|date:"d/m/Y" }}</td>
+                <td class="
+                    {% if oci.data_conclusao and oci.data_conclusao <= oci.data_limite %}
+                        verde
+                    {% elif oci.atrasada %}
+                        vermelho
+                    {% endif %}">
+                    {{ oci.data_limite|date:"d/m/Y" }}
+                </td>
+
             </tr>
             {% empty %}
             <tr>
@@ -57,7 +65,7 @@
             {% endfor %}
         </tbody>
     </table>
-    
+
     <!-- Paginacao da Segunda Secao -->
     <h2 class="section-title">
         OCIs Fora do Prazo
@@ -67,7 +75,7 @@
             {% else %}
             <span class="disabled">&lt;</span>
             {% endif %}
-    
+
             {% if vencidas_page.has_next %}
             <a href="?page_vencidas={{ vencidas_page.next_page_number }}">&gt;</a>
             {% else %}
@@ -75,7 +83,7 @@
             {% endif %}
         </span>
     </h2>
-    
+
     <!-- Foras do prazo -->
     <table class="tabela-pacientes">
         <thead>
