@@ -6,6 +6,17 @@
 {% endblock %}
 
 {% block content %}
+<!-- BLOCO DE NOTIFICAÇÃO (TOAST) -->
+{% if messages %}
+    <div id="toast-container">
+        {% for message in messages %}
+            <div class="toast-notification {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
 <div class="main-content-inner">
 
     <!-- Paginacao da Primeira Secao-->
@@ -114,5 +125,23 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const toasts = document.querySelectorAll('.toast-notification');
+        
+        toasts.forEach(toast => {
+            // Adiciona a classe para descer (aparecer)
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100); // Pequeno delay para garantir a transição
+
+            // Remove a classe para subir (sumir) após 4 segundos
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        });
+    });
+</script>
 
 {% endblock %}
